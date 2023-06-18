@@ -9,6 +9,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
 
+//Loading of the enviroment variable from the dotenv file present in the current directory
 dotenv.config({ path: "./.env" });
 const app = express();
 

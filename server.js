@@ -63,8 +63,7 @@ app.use(session({
 
 
 
-
-
+//The provided code snippet establishes a connection to a MySQL database using the connect method of the connection object
 connection.connect((error) => {
   if (error) {
     console.error("Error connecting to MySQL database:", error);
@@ -72,6 +71,7 @@ connection.connect((error) => {
   }
   console.log("Connected to MySQL database!");
 });
+
 
 
 app.get("/", (req, res) => {

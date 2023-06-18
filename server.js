@@ -1,3 +1,4 @@
+//Importing the modules from the library of express
 const express = require("express");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
@@ -187,7 +188,7 @@ app.post("/resetpassword/:token", (req, res) => {
   });
 });
 
-
+//Adding the details in the database in authenticate table using bcrypt to secure the password
 app.get("/adddetails", (req, res) => {
     const name = req.query.name;
     const email = req.query.email;

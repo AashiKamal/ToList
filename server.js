@@ -188,7 +188,8 @@ app.post("/resetpassword/:token", (req, res) => {
   });
 });
 
-//Adding the details in the database in authenticate table using bcrypt to secure the password
+// Adding the details in dataabase bu using bcrypt algo of hashing to secure the password 
+//it uses a hash function which take salt rounds and convets it into the hash
 app.get("/adddetails", (req, res) => {
     const name = req.query.name;
     const email = req.query.email;

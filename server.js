@@ -31,6 +31,7 @@ const transporter = nodemailer.createTransport({
 
 
 
+//create a connection to the database using the createconnection method which is present in mysql module
 const connection = mysql.createConnection({
   host: process.env.DATABASE_HOST,
   user: process.env.DATABASE_USER,
@@ -40,8 +41,10 @@ const connection = mysql.createConnection({
 
 
 
-const publicDirectory = path.join(__dirname, "./public");
-console.log(__dirname);
+
+
+// const publicDirectory = path.join(__dirname, "./public");
+// console.log(__dirname);
 
 
 

@@ -19,9 +19,7 @@ const app = express();
 
 
 
-
-
-// Configure nodemailer transporter
+// Configure nodemailer transporter creating object which is ised to send mails
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {

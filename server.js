@@ -43,7 +43,7 @@ app.use('/details', details)
   
 
 
-//Server is listening to port numberss..
+//Server is listening to port numbers.s..
 app.listen(1000, () => {
   console.log("Server is running on port 1000");
 });

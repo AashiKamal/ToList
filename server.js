@@ -41,6 +41,9 @@ app.use('/details', details)
     res.render('welcome.ejs', { user });
   });
   
+
+
+//Server is listening to port 
 app.listen(1000, () => {
   console.log("Server is running on port 1000");
 });

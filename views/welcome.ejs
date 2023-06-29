@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome</title>
+  <style>
+    body {
+      background-color: #91a74c;
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      
+    }
+
+    .jumbotron {
+      background-color: #f8f9fa;
+      padding: 40px;
+      text-align: center;
+      border-radius: 10px;
+      margin: 100px auto;
+      max-width: 600px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333333;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      background-color: #007bff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="jumbotron">
+    <h1>Welcome, <%= name %>! To This Website</h1>
+    <a href="/">Logout</a>
+  </div>
+</body>
+
+</html>

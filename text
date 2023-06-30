@@ -49,3 +49,53 @@ dotenv.config({ path: "./.env" }): This line loads the environment variables fro
 const app = express(): This line creates an instance of the Express application. It initializes and sets up the Express framework, allowing you to define routes, middleware, and other application-level settings.
 
 
+__dirname is a global variable in Node.js that represents the directory name of the current module.
+
+
+
+
+
+
+
+
+
+
+
+
+Static files are files that are served directly to the client without any processing or modification by the server. These files include HTML, CSS, JavaScript, images, fonts, and other assets that make up the frontend of a web application.
+
+app.set("view engine", "hbs"): This line sets the view engine for rendering dynamic templates. The code sets the view engine to "hbs", which stands for Handlebars. Handlebars is a popular template engine that allows you to dynamically generate HTML by combining templates with data.
+
+app.use(bodyParser.urlencoded({ extended: true })): This line adds the body-parser middleware to parse URL-encoded form data. It parses the request body and makes it accessible via req.body. The extended: true option allows parsing of rich objects and arrays.
+
+app.use(cookieParser()): This line adds the cookie-parser middleware. It parses the cookie header in incoming requests and populates req.cookies with an object containing key-value pairs of the parsed cookies. It enables you to read and manipulate cookies in your Express application.
+
+app.use(session({ secret: "secret", resave: true, saveUninitialized: true })): This line adds the express-session middleware for session management. It initializes and configures session handling in your application. The secret option is used to sign the session cookie, and resave and saveUninitialized options control the behavior of session saving.
+
+
+In this example, we set the view engine to "ejs" using app.set('view engine', 'ejs'). This configures Express to use EJS as the template engine.
+
+Inside the route handler for the root URL ("/"), we use res.render() to render the "index" view. We pass an object with a name property set to "John" as data to be injected into the template. In the EJS template, <%= name %> is used to output the value of the name property.
+
+The res.render() function automatically looks for a file with the specified view name (index) and the file extension associated with the view engine (ejs). It renders the view and sends the resulting HTML to the client.
+
+EJS provides additional features like control structures (<% if %>, <% for %>, etc.), partials, and custom tags, allowing you to create more complex and dynamic templates
+
+
+app.use('/', home): This line sets up a middleware function to handle requests to the root URL ("/"). It uses the home module or router to define the logic for handling these requests. The home module likely contains route handlers or middleware specific to the root URL.
+
+app.use('/password', password): This line sets up a middleware function to handle requests to the "/password" URL path. It uses the password module or router to define the logic for handling these requests. The password module likely contains route handlers or middleware specific to password-related functionality.
+
+app.use('/details', details): This line sets up a middleware function to handle requests to the "/details" URL path. It uses the details module or router to define the logic for handling these requests. The details module likely contains route handlers or middleware specific to retrieving and managing user details or other related functionality.
+
+
+
+
+
+
+
+
+
+
+
+

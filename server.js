@@ -23,29 +23,30 @@ const app = express();
 
 
 
-console.log(__dirname);
-
+//Setting up the middlwware for handling the requests on a specifies Url
 app.use(express.static('/public'));
-app.set("view engine", "hbs");
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
   secret: "secret",
   resave: true,
-  saveUninitialized: true 
+  saveUninitialized: true
 }));
 
 app.use('/', home)
 app.use('/password', password)
 app.use('/details', details)
 
+app.get('/welcome', (req, res) => {
+  // retrieved the user information from the database
+  const user = req.body.email
+  res.render('welcome.ejs', { user });
+});
 
-  app.get('/welcome', (req, res) => {
-    // Assuming you have retrieved the user information from the database
-    const user = req.body.email
-    res.render('welcome.ejs', { user });
-  });
-  
+
+
+
 
 
 //Server is listening to port numberss..

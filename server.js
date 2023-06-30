@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const home = require("./routes/auth")
 const password = require("./routes/password")
 const details = require("./routes/details")
+//Zam Secret
 
 
 

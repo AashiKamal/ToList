@@ -3,6 +3,9 @@ const connection = require('../database/connection');
 const router = express.Router()
 const bcrypt = require('bcrypt')
 
+
+
+//Authentication is working here function is checking the details 
 router.post("/showdetails", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;

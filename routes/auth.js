@@ -1,7 +1,10 @@
+//Importing module of nodejs and also from other file
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const connection = require('../database/connection')
+
+
 
 router.get("/", (req, res) => {
   let error = ''
@@ -47,7 +50,7 @@ router.post("/adddetails", (req, res) => {
           }
 
           else{
-            let error = 'user allready exist'
+            let error = 'User Already Exist'
             res.render('register.ejs', {error})
           }
       })
@@ -57,6 +60,3 @@ router.post("/adddetails", (req, res) => {
   
 module.exports = router
 
-/*
-    
-*/

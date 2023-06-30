@@ -28,7 +28,7 @@ router.get("/forgotpassword", (req, res) => {
       }
   
       if (results.length > 0) {
-        // Generate a password reset token (you can use any method to generate a token)
+        // Generate a password reset token by random string token generator also cryptographic library(you can use any method to generate a token)
         const resetToken = Math.random().toString(36).slice(-8);
   
         // Update the user's reset_token field in the database

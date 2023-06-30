@@ -92,10 +92,90 @@ app.use('/details', details): This line sets up a middleware function to handle 
 
 
 
+<form>: This is an HTML tag used to create an HTML form.
+
+method="post": This attribute specifies the HTTP method to be used when submitting the form. In this case, the form will be submitted using the POST method.
+
+action="/details/showdetails": This attribute specifies the URL or path to which the form data will be submitted. In this example, the form data will be sent to "/details/showdetails".
+
+<%= error %>: This is an EJS tag used to embed server-side code within the HTML template. It is likely that the error variable is provided by the server and will be replaced with its value when rendering the template.
+
+<div class="txt_field">, <input>, <span>, <label>: These HTML tags are used to create form input fields. In this example, two fields are included: one for email (type="email") and one for password (type="password"). The <label> tag provides a text label for each input field.
+
+<div class="pass">, <a href="/password/forgotpassword">: These tags create a link to a "Forgot Password?" page. The link points to "/password/forgotpassword".
+
+<input type="submit" value="Login">: This tag creates a submit button for the form. When clicked, it will trigger the form submission.
+
+<div class="signup_link">, <a href="/register">: These tags create a link to a "Signup" page. The link points to "/register
 
 
 
 
 
 
+router.post("/showdetails", ...) registers a route handler for the POST request to "/details/showdetails". This means that when a form with a method of "post" is submitted to this URL, this handler will be triggered.
 
+const email = req.body.email; retrieves the value of the "email" field from the form submission data. req.body is an object that contains the parsed request body data.
+
+const password = req.body.password; retrieves the value of the "password" field from the form submission data.
+
+connection.query(...) performs a database query to retrieve user data based on the provided email. This code assumes the use of some database connection (imported as connection) and executes a SELECT query on a table called "authenticate" to find a matching email.
+
+The callback function (error, results) is executed when the database query completes. Inside this callback, the code handles the query results and performs further actions.
+
+If an error occurs during the database query, an error message is logged, and a response with status 500 (Internal Server Error) and an error message is sent back to the client.
+
+If the query returns one or more results, the code compares the provided password with the hashed password stored in the database using bcrypt.compare(). If the comparison is successful, the username (retrieved from the query results) is stored in the session (req.session.username).
+
+Another database query is executed to retrieve user data based on the provided email. The username is extracted from the query results.
+
+Finally, if the username and password are valid, the server renders the "welcome.ejs" template and passes the name variable as data to the template. If the credentials are invalid, the "login.ejs" template is rendered again with an error message.
+
+If the query does not return any results, a response with status code 206 (Partial Content) and a message indicating that the email does not exist is sent back to the client
+
+
+
+
+
+
+//token genration
+if (results.length > 0) checks if the query results contain any rows, indicating that the email exists in the database.
+
+Inside the if block, a password reset token is generated using Math.random().toString(36).slice(-8). This code generates a random string of length 8, which can be used as a token.
+
+The user's reset_token field in the database is updated with the generated reset token using an UPDATE query.
+
+connection.query('UPDATE ...', [resetToken, email], async (error, results) => { ... }) executes the update query to set the reset_token field for the user with the matching email address.
+
+If an error occurs during the update query, an error message is logged, and a response with status 500 (Internal Server Error) and an error message is sent back to the client.
+
+const mailOptions = { ... } sets up the email options for the password reset email. It includes the sender email, recipient email (the user's email address), subject, and the email content with a link to reset the password. You can customize the email template and content as needed.
+
+await transporter.sendMail(mailOptions) sends the password reset email using the transporter object created previously. The sendMail function is an asynchronous operation, so it is awaited.
+
+If the password reset email is sent successfully, a success message is logged and a response with a success message is sent back to the client.
+
+If an error occurs during the email sending process, an error message is logged, and a response with status 500 (Internal Server Error) and an error message is sent back to the client.
+
+If the query to retrieve user data does not return any results (indicating that the email does not exist in the database), a response with status code 206 (Partial Content) and a message indicating that the email does not exist is sent back to the client.
+
+
+The code snippet you provided does not include the generation of the token. The token is expected to be provided as part of the URL path when making a GET request to the "/resetpassword/:token" endpoint.
+
+In the context of the code snippet, the params object refers to the route parameters in the Express.js framework. Route parameters are named URL segments that are captured and extracted from the URL path. In this case, the :token is a route parameter defined in the route path "/resetpassword/:token". When a GET request is made to this endpoint with a token value, it can be accessed through req.params.token.
+
+For example, if the endpoint is accessed with the URL "/resetpassword/abcd1234", req.params.token will be set to "abcd1234".
+
+The token value is typically generated and provided by another part of the application, such as when sending a password reset email. The token can be generated using various methods, such as using a random string generator, a cryptographic library, or a combination of user-specific information and encryption.
+
+In the provided code, the focus is on handling the GET request and checking if the provided token exists in the database. The actual generation of the token would be done elsewhere in the application flow, such as when sending the password reset email, and the generated token would be included in the reset password URL sent to the user.
+
+The await transporter statement in the code you provided is used to await the asynchronous operation of sending an email using the transporter object created by nodemailer.
+
+In JavaScript, the await keyword can only be used inside an asynchronous function to pause the execution of the function until a promise is resolved or rejected. By placing await before the transporter.sendMail(mailOptions) statement, the code waits for the sendMail function to complete its execution before moving on to the next line of code.
+
+The await keyword is typically used with functions that return promises, allowing you to write asynchronous code in a more synchronous style. In this case, transporter.sendMail(mailOptions) returns a promise that resolves when the email sending process is complete.
+
+By using await, the code ensures that the email sending operation is finished before moving on to the next line, which in your code logs a success message and sends a response to the client. This allows you to handle any potential errors that may occur during the email sending process and provide an appropriate response to the user.
+
+Note that in order to use await, the surrounding function must be declared as async. So, make sure that the parent function or block where await transporter is used is marked as async.

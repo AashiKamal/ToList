@@ -12,11 +12,15 @@ const password = require("./routes/password")
 const details = require("./routes/details")
 
 
+
+
+
+//Importing the dotenv file through dotenv module
 dotenv.config({ path: "./.env" });
 const app = express();
 
 
-// Configure nodemailer transporter
+
 
 
 console.log(__dirname);

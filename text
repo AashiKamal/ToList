@@ -1,5 +1,51 @@
+The gitignore file is a confoguration file used to get files and folder that should be ignored and not tracked by the version control system it allows us to focus only on the relevannt code
+
+
+tthe .env file is used to store api keys and database credentials it provide sepration of sensitive information fron datavase and keeep sensituve information private
+npm i dotenv
+
 
 The Express module is a web application framework for Node.js that simplifies the process of building web applications and APIs.
 It can be installed using npm (npm install express) and allows you to define routes and middleware functions to handle HTTP requests and perform operations on the request and response objects.
+npm install express
 
 Middleware functions in Express are functions that have access to the request and response objects and can perform operations on them before passing control to the next middleware or route handler. They are commonly used for tasks like logging, authentication, request parsing, error handling, and security measures
+
+project-son file is a json file used to store all dependecies and script and pother metadata 
+it include project name version and dependencies
+npm init
+
+
+bcrupt turns a simple password into fixed length called hash
+
+hashing data will go through a series of salt resulting in a secure hash
+
+path is a builtin module in nodejs it  provide a utility function for working with path module path.join([path10],path2)
+path.resolve
+path.dirname
+
+
+session used in banking and facebook and all other app
+
+nodemailer: Nodemailer is a module that allows you to send emails from your Node.js application. It provides an easy-to-use API for sending emails using various transport methods like SMTP, sendmail, and more.
+
+dotenv: dotenv is a module that loads environment variables from a .env file into the process.env object. It allows you to store sensitive configuration data like API keys, database credentials, or any other environment-specific settings in a separate file and easily access them in your application.
+
+bcrypt: bcrypt is a module used for password hashing and encryption. It provides functions for generating secure hash representations of passwords, making them more resistant to brute-force attacks or unauthorized access.
+
+path: path is a built-in module in Node.js that provides utilities for working with file paths. It helps in constructing file paths, resolving relative paths, and extracting various components (e.g., directory name, file extension) from a given path.
+
+cookie-parser: cookie-parser is a middleware module that parses cookies attached to the incoming request object. It parses the cookie header and populates req.cookies with an object containing key-value pairs of the parsed cookies.
+
+express-session: express-session is a middleware module that enables session management in Express applications. It helps in creating and managing sessions, storing session data, and providing session-based authentication and state management.
+
+body-parser: body-parser is a middleware module that parses the request body and makes it available as req.body in Express applications. It supports parsing various data formats like JSON, URL-encoded data, and more.
+
+home, password, details: These are custom modules or routes that are being imported into the main application file (index.js or similar). They represent separate routes or functionality for handling authentication, password-related operations, and additional details, respectively.
+
+
+dotenv.config({ path: "./.env" }): This line loads the environment variables from a .env file located in the current directory ("./.env") using the dotenv module. The .env file typically contains key-value pairs of environment-specific configuration data.
+
+const app = express(): This line creates an instance of the Express application. It initializes and sets up the Express framework, allowing you to define routes, middleware, and other application-level settings.
+
+

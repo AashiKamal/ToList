@@ -1,0 +1,5 @@
+
+The Express module is a web application framework for Node.js that simplifies the process of building web applications and APIs.
+It can be installed using npm (npm install express) and allows you to define routes and middleware functions to handle HTTP requests and perform operations on the request and response objects.
+
+Middleware functions in Express are functions that have access to the request and response objects and can perform operations on them before passing control to the next middleware or route handler. They are commonly used for tasks like logging, authentication, request parsing, error handling, and security measures

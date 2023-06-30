@@ -1,3 +1,4 @@
+//Importing the required modules
 const express = require("express");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
@@ -27,7 +28,7 @@ app.use(cookieParser());
 app.use(session({
   secret: "secret",
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true 
 }));
 
 app.use('/', home)

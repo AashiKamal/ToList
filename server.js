@@ -14,18 +14,15 @@ const details = require("./routes/details")
 
 
 
-
-
 //Importing the dotenv file through dotenv module
 dotenv.config({ path: "./.env" });
 const app = express();
 
 
 
-
-
 //Setting up the middlwware for handling the requests on a specifies Url
-app.use(express.static('/public'));
+app.use(express.json());
+app.use('/', express.static('public'));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -45,10 +42,10 @@ app.get('/welcome', (req, res) => {
   res.render('welcome.ejs', { user });
 });
 
-
-
-
-
+app.get('/logout', (req, res) => {
+    res.cookie('auth_token', "", {maxAge: 1});
+    res.redirect('/');
+});
 
 //Server is listening to port numberss..
 app.listen(1000, () => {

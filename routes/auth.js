@@ -3,10 +3,39 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const connection = require('../database/connection')
+const jwt = require('jsonwebtoken')
+
+// if token is valid and user trying to login or register render user to dashboard directly...
+const auth = async function(req, res, next) {
+    token = req.cookies.auth_token;
+
+    if(!token) {
+        return next();
+    }
+    try {
+        const info = await jwt.verify(token, process.env.JWT_PRIVATE_TOKEN || "UNSECURED_JWT_PRIVATE_TOKEN")
+        const email = info.email
+        connection.query(`select * from user where email = '${email}'`, (err, result) => {
+            if (!result[0]) {
+               return next();
+            }  
+
+            connection.query('SELECT * FROM user WHERE email = ?', [email], (error, result) => {
+                let name = result[0].name;   
+                res.render("welcome.ejs", {name});
+            })
+
+        })
 
 
+    } catch (error) {
+      
+        return next();
+    }
+}
 
-router.get("/", (req, res) => {
+
+router.get("/", auth, (req, res) => {
   let error = ''
   res.render("login.ejs", {error});
 });
@@ -23,7 +52,7 @@ router.post("/adddetails", (req, res) => {
       const password = req.body.password;
   
 
-      connection.query(`select * from authenticate where name = '${name}'`, (err, result) => {
+      connection.query(`select * from user where name = '${name}' or email = '${email}'`, (err, result) => {
 
           if(result[0] == undefined){
             bcrypt.hash(password, 10, (err, encryptedPassword) => {
@@ -32,7 +61,7 @@ router.post("/adddetails", (req, res) => {
                 return res.status(500).send("Error hashing password");
               }
           
-              const query = "INSERT INTO authenticate (name, email, password) VALUES (?, ?, ?)";
+              const query = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)";
               const values = [name, email, encryptedPassword];
           
               connection.query(query, values, (err, result) => {

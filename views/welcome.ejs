@@ -3,16 +3,24 @@
 
 <head>
   <title>Welcome</title>
+  <link rel="stylesheet" href="/css/welcome.css">
+  
 </head>
 
-
-
-<!-- This File is rendering the welcome page -->
 <body>
   <div class="jumbotron">
-    <h1>Welcome, <%= name %>! To This Website</h1>
-    <a href="/">Logout</a>
+    <h1>Welcome, <span id="username"><%= name %></span>! To This Website</h1>
+    <a href="/logout">Logout</a>
   </div>
+
+  <div class="todo-list">
+    <h2>To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script src="/js/xhr.js"></script>
 </body>
 
 </html>

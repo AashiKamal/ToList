@@ -21,7 +21,7 @@ router.get("/forgotpassword", (req, res) => {
     const email = req.body.email;
   
     // Check if the email exists in the database
-    connection.query('SELECT * FROM authenticate WHERE email = ?', [email], async (error, results) => {
+    connection.query('SELECT * FROM user WHERE email = ?', [email], async (error, results) => {
       if (error) {
         console.error("Error occurred while fetching user data:", error);
         return res.status(500).send("Error occurred while fetching user data");
@@ -32,7 +32,7 @@ router.get("/forgotpassword", (req, res) => {
         const resetToken = Math.random().toString(36).slice(-8);
   
         // Update the user's reset_token field in the database
-        connection.query('UPDATE authenticate SET reset_token = ? WHERE email = ?', [resetToken, email], async (error, results) => {
+        connection.query('UPDATE user SET reset_token = ? WHERE email = ?', [resetToken, email], async (error, results) => {
           if (error) {
             console.error("Error occurred while updating reset token:", error);
             return res.status(500).send("Error occurred while updating reset token");
@@ -68,7 +68,7 @@ router.get("/forgotpassword", (req, res) => {
     const resetToken = req.params.token;
   
     // Check if the reset token exists in the database
-    connection.query('SELECT * FROM authenticate WHERE reset_token = ?', [resetToken], (error, results) => {
+    connection.query('SELECT * FROM user WHERE reset_token = ?', [resetToken], (error, results) => {
       if (error) {
         console.error("Error occurred while fetching user data:", error);
         return res.status(500).send("Error occurred while fetching user data");
@@ -88,7 +88,7 @@ router.get("/forgotpassword", (req, res) => {
     const newPassword = req.body.newPassword;
   
     // Check if the reset token exists in the database
-    connection.query('SELECT * FROM authenticate WHERE reset_token = ?', [resetToken], async (error, results) => {
+    connection.query('SELECT * FROM user WHERE reset_token = ?', [resetToken], async (error, results) => {
       if (error) {
         console.error("Error occurred while fetching user data:", error);
         return res.status(500).send("Error occurred while fetching user data");
@@ -98,7 +98,7 @@ router.get("/forgotpassword", (req, res) => {
         const encryptedPassword = await bcrypt.hash(newPassword, 10);
   
         // Update the user's password and reset_token fields in the database
-        connection.query('UPDATE authenticate SET password = ?, reset_token = NULL WHERE reset_token = ?', [encryptedPassword, resetToken], async (error, results) => {
+        connection.query('UPDATE user SET password = ?, reset_token = NULL WHERE reset_token = ?', [encryptedPassword, resetToken], async (error, results) => {
           if (error) {
             console.error("Error occurred while updating password:", error);
             return res.status(500).send("Error occurred while updating password");

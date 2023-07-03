@@ -1,4 +1,4 @@
-//Importing the required modules
+//Importing the required modules and files
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
